@@ -37,6 +37,7 @@
                             <td>{{ $row->role }}</td>
                         </tr>
                     @endforeach
+
                 </tbody>
             </table>
         </div>

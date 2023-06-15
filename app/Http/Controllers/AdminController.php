@@ -27,7 +27,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create');
     }
 
     /**
@@ -35,7 +35,9 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_lengkap' => 'required'
+        ]);
     }
 
     /**
