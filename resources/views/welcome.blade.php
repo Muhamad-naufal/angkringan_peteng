@@ -10,7 +10,7 @@
                     Fasilitas lengkap dan bersih, dilengkapi dengan kamar mandi yang bersih dan seger</p>
             </div>
             <div class="col-6">
-                <h2 class="text-center">Menu Aman</h2>
+                <h2 class="text-center">Menu Dalam Keadaan Aman</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore ut omnis eum voluptatum dolorum unde
                     voluptatibus beatae atque libero quod fuga debitis aspernatur quisquam quidem expedita inventore quae
                     magnam autem perspiciatis, in nihil. Tenetur quaerat iste consequuntur quae doloremque magnam,
