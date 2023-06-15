@@ -11,25 +11,29 @@
             <x-search />
         </div>
         <x-card-table />
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Nama User</th>
-                <th>Username</th>
-                <th>Role</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $no = $data->firstItem(); ?>
-            @foreach ($data as $row)
-                <tr>
-                    <td>{{ $no++ }}</td>
-                    <td>{{ $row->nama }}</td>
-                    <td>{{ $row->username }}</td>
-                    <td>{{ $row->role }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </div>
+        <div class="card-body p-0">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nama User</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $no = 1; ?>
+                    @foreach ($data as $row)
+                        <tr>
+                            <td>{{ $no++ }}</td>
+                            <td>{{ $row->nama }}</td>
+                            <td>{{ $row->username }}</td>
+                            <td>{{ $row->role }}</td>
+                        </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
