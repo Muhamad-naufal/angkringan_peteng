@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+    <x-status />
+
     <div class="card">
         <div class="card-header">
             <x-btn-create :link="route('admin.create')" />
@@ -19,6 +21,7 @@
                         <th>Nama User</th>
                         <th>Username</th>
                         <th>Role</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,11 +32,19 @@
                             <td>{{ $row->nama }}</td>
                             <td>{{ $row->username }}</td>
                             <td>{{ $row->role }}</td>
-                        </tr>
-                    @endforeach
+                            <td>
+                                <x-btn-edit :link="route('admin.edit',['admin'=>$row->id]) />
+                                <x-btn-btn-delete :link="route('admin.destroy',['admin'=>$row->id])"
+                                </td>
+                            </tr>
+     @endforeach
 
                 </tbody>
             </table>
         </div>
     </div>
+@endsection
+
+@section('modal')
+<x-modal-delete />
 @endsection

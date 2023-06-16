@@ -36,8 +36,19 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_lengkap' => 'required'
+            'nama_lengkap' => 'required',
+            'username' => 'required|alpha_dash|unique:admins',
+            'password' => 'required|min:4|confirmed'
         ]);
+
+        Admin::create([
+            'nama' => $request->nama_lengkap,
+            'username' => $request->username,
+            'password' => bcrypt($request->password),
+            'role' => 'resepsionis',
+        ]);
+
+        return redirect()->route('admin.index')->with('status', 'store');
     }
 
     /**
@@ -45,30 +56,53 @@ class AdminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return abort(404);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Admin $admin)
     {
-        //
+        return view('admin.edit', ['row' => $admin]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Admin $admin)
     {
-        //
+        $request->validate([
+            'nama_lengkap' => 'required',
+            'username' => "required|alpha_dash|unique:admins,username,{$admin->id}",
+            'password' => 'nullable|min:4|confirmed'
+        ]);
+
+        if ($request->password) {
+            $arr = [
+                'nama' => $request->nama_lengkap,
+                'username' => $request->username,
+                'password' => bcrypt($request->password),
+            ];
+        } else {
+            $arr = [
+                'nama' => $request->nama_lengkap,
+                'username' => $request->username,
+            ];
+        }
+
+        $admin->update($arr);
+
+        return redirect()->route('admin.index')->with('status', 'update');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Admin $admin)
     {
-        //
+        $admin->delete();
+
+        return redirect()->route('admin.index')->with('status', 'destroy');
     }
 }
