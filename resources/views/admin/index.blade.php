@@ -33,12 +33,17 @@
                             <td>{{ $row->username }}</td>
                             <td>{{ $row->role }}</td>
                             <td>
-                                <x-btn-edit :link="route('admin.edit',['admin'=>$row->id]) />
-                                <x-btn-btn-delete :link="route('admin.destroy',['admin'=>$row->id])"
-                                </td>
-                            </tr>
-     @endforeach
-
+                                <x-btn-edit :link="route('admin.edit', ['admin' => $row->id])" />
+                                <form onsubmit="return confirm('Anda memilih menghapus data, apakah yakin ?')" method="POST"
+                                    action="{{ route('admin.destroy', $row->id) }}" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-sm" type="submit" name="submit"><i
+                                            class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -46,5 +51,5 @@
 @endsection
 
 @section('modal')
-<x-modal-delete />
+    <x-modal-delete />
 @endsection

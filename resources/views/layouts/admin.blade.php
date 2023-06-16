@@ -124,6 +124,7 @@
             reserved.
         </footer>
     </div>
+
     @yield('modal')
 
 
