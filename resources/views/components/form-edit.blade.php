@@ -1,8 +1,10 @@
-@props(['action'])
+@props(['action', 'header' => true])
 <form action="{{ $action }}" method="post" class="card card-primary">
-    <div class="card-header">
-        <i class="fas fa-edit"> </i> Edit
-    </div>
+    @if ($header)
+        <div class="card-header">
+            <i class="fas fa-edit"> </i> Edit
+        </div>
+    @endif
     <div class="card-body">
         @method('PUT')
         <?= $slot ?>

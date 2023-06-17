@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 
@@ -37,15 +38,15 @@ class AdminController extends Controller
     {
         $request->validate([
             'nama_lengkap' => 'required',
-            'username' => 'required|alpha_dash|unique:admins',
-            'password' => 'required|min:4|confirmed'
+            'username' => 'required', 'alpha_dash', 'unique:admins',
+            'password' => 'required', 'min:4', 'confirmed'
         ]);
 
         Admin::create([
             'nama' => $request->nama_lengkap,
             'username' => $request->username,
             'password' => bcrypt($request->password),
-            'role' => 'resepsionis',
+            'role' => 'kasir',
         ]);
 
         return redirect()->route('admin.index')->with('status', 'store');
@@ -74,8 +75,8 @@ class AdminController extends Controller
     {
         $request->validate([
             'nama_lengkap' => 'required',
-            'username' => "required|alpha_dash|unique:admins,username,{$admin->id}",
-            'password' => 'nullable|min:4|confirmed'
+            'username' => "required", "alpha_dash", "unique:admins,username,{$admin->id}",
+            'password' => 'nullable', 'min:4', 'confirmed'
         ]);
 
         if ($request->password) {
@@ -104,5 +105,12 @@ class AdminController extends Controller
         $admin->delete();
 
         return redirect()->route('admin.index')->with('status', 'destroy');
+    }
+
+    public function akun()
+    {
+        $admin = Auth::user();
+
+        return view('admin.akun', ['row' => $admin]);
     }
 }
