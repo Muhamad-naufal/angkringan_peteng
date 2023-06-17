@@ -38,15 +38,15 @@ class AdminController extends Controller
     {
         $request->validate([
             'nama_lengkap' => 'required',
-            'username' => 'required', 'alpha_dash', 'unique:admins',
-            'password' => 'required', 'min:4', 'confirmed'
+            'username' => 'required|alpha_dash|unique:admins',
+            'password' => 'required|min:4|confirmed'
         ]);
 
         Admin::create([
             'nama' => $request->nama_lengkap,
             'username' => $request->username,
             'password' => bcrypt($request->password),
-            'role' => 'kasir',
+            'role' => 'resepsionis',
         ]);
 
         return redirect()->route('admin.index')->with('status', 'store');
@@ -75,8 +75,8 @@ class AdminController extends Controller
     {
         $request->validate([
             'nama_lengkap' => 'required',
-            'username' => "required", "alpha_dash", "unique:admins,username,{$admin->id}",
-            'password' => 'nullable', 'min:4', 'confirmed'
+            'username' => "required|alpha_dash|unique:admins,username,{$admin->id}",
+            'password' => 'nullable|min:4|confirmed'
         ]);
 
         if ($request->password) {
@@ -112,5 +112,33 @@ class AdminController extends Controller
         $admin = Auth::user();
 
         return view('admin.akun', ['row' => $admin]);
+    }
+
+    public function updateAkun(Request $request, Admin $admin)
+    {
+        $admin = Auth::user();
+
+        $request->validate([
+            'nama_lengkap' => 'required',
+            'username' => "required", "alpha_dash", "unique:admins,username,{$admin->id}",
+            'password' => 'nullable', 'min:4', 'confirmed'
+        ]);
+
+        if ($request->password) {
+            $arr = [
+                'nama' => $request->nama_lengkap,
+                'username' => $request->username,
+                'password' => bcrypt($request->password),
+            ];
+        } else {
+            $arr = [
+                'nama' => $request->nama_lengkap,
+                'username' => $request->username,
+            ];
+        }
+
+        $admin->update($arr);
+
+        return redirect()->route('admin.index')->with('status', 'update');
     }
 }
