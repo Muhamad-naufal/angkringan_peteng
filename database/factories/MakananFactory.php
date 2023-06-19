@@ -17,7 +17,9 @@ class MakananFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nama_makanan' => $this->faker->word(),
+            'jum_makanan' => $this->faker->numberBetween(5, 10),
+            'harga_makanan' => $this->faker->numberBetween(10000, 50000),
         ];
     }
 }

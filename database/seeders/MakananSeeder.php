@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Makanan;
 
 class MakananSeeder extends Seeder
 {
@@ -12,6 +12,6 @@ class MakananSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Makanan::factory(10)->create();
     }
 }

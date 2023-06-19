@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Makanan extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
+    public $fillable = [
+        'nama_makanan',
+        'foto_makanan',
+        'jum_makanan',
+        'harga_makanan'
+    ];
 }
