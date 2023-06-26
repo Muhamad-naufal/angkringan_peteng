@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Makanan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,10 @@ Route::get('/', function () {
 })->name('home');
 
 Route::view('makanan', 'makanan')->name('makanan');
+Route::get('/makanan', function () {
+    $data = Makanan::all(); // Mendapatkan data dari model Makanan
+    return view('makanan', compact('data'));
+})->name('makanan');
 
 
 
@@ -37,6 +42,7 @@ Route::group(
             Route::put('/akun', 'AdminController@updateAkun');
             Route::group(['middleware' => ['can:role,"admin"']], function () {
                 Route::resource('admin', 'AdminController');
+                Route::resource('makanan', 'MakananController');
             });
         });
     }

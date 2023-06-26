@@ -1,4 +1,4 @@
-@props(['label', 'name', 'type' => 'text', 'value' => ''])
+@props(['label', 'name', 'type' => 'text', 'value' => '', 'keterangan' => ''])
 <div class="form-group">
     <label><?= $label ?></label>
     <input type="{{ $type }}" name="{{ $name }}" value="{{ old($name, $value) }}"
@@ -6,4 +6,9 @@
     @error('title')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
+    @if ($keterangan)
+        <div class="text-muted">
+            <small>{{ $keterangan }}</small>
+        </div>
+    @endif
 </div>

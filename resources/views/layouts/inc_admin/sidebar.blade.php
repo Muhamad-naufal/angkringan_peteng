@@ -13,6 +13,7 @@
                 <x-nav-item label="Dashboard" icon="fa-solid fa-clipboard" :link="route('dashboard')" />
                 @can('role', 'admin')
                     <x-nav-item label="User Admin" icon="fas fa-users" :link="route('admin.index')" />
+                    <x-nav-item label="User Makanan" icon="fa-solid fa-utensils" :link="route('makanan.index')" />
                 @endcan
             </ul>
         </nav>

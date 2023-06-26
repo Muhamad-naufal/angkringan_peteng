@@ -1,7 +1,7 @@
-@extends('layouts.admin', ['title' => 'User Admin'])
+@extends('layouts.admin', ['title' => 'Makanan'])
 
 @section('content-header')
-    <h1 class="m-0"><i class="fas fa-users"> User Admin</i></h1>
+    <h1 class="m-0"><i class="fas fa-plate-utensils"> Makanan</i></h1>
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <x-btn-create :link="route('admin.create')" />
+                    <x-btn-create :link="route('makanan.create')" />
                 </div>
                 <div class="col">
                     <x-search />
@@ -24,9 +24,9 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Nama User</th>
-                        <th>Username</th>
-                        <th>Role</th>
+                        <th>Nama Makanan</th>
+                        <th>Harga</th>
+                        <th>Jumlah</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -35,13 +35,13 @@
                     @foreach ($data as $row)
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td>{{ $row->nama }}</td>
-                            <td>{{ $row->username }}</td>
-                            <td>{{ $row->role }}</td>
+                            <td>{{ ucwords($row->nama_makanan) }}</td>
+                            <td>Rp. {{ number_format($row->harga_makanan, 2, ',', '.') }}</td>
+                            <td>{{ $row->jum_makanan }}</td>
                             <td>
-                                <x-btn-edit :link="route('admin.edit', ['admin' => $row->id])" />
+                                <x-btn-edit :link="route('makanan.edit', ['makanan' => $row->id])" />
                                 <form onsubmit="return confirm('Anda memilih menghapus data, apakah yakin ?')" method="POST"
-                                    action="{{ route('admin.destroy', $row->id) }}" class="d-inline">
+                                    action="{{ route('makanan.destroy', $row->id) }}" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm" type="submit" name="submit"><i

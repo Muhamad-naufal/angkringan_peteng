@@ -1,96 +1,29 @@
 @extends('layouts.tamu', ['title' => 'Makanan'])
 
 @section('content')
-    <x-form-pemesanan />
-    <h1 class="text-center my-4">Fasilitas</h1>
-
-    <div class="row fasilitas">
-        <div class="col-md-3">
-            <a class="card card-light" href="#">
-                <div class="card-header">
-                    Gratis Sarapan Pagi
-                </div>
-                <div class="card-body p-1">
-                    <img src="images/sarapan.jpg" class="img-fluid rounded" />
-                </div>
-
-            </a>
-        </div>
-        <div class="col-md-3">
-            <a class="card card-light" href="#">
-                <div class="card-header">
-                    Kolam Renang
-                </div>
-                <div class="card-body p-1">
-                    <img src="images/kolam_renang.jpg" class="img-fluid rounded" />
-                </div>
-
-            </a>
-        </div>
-        <div class="col-md-3">
-            <a class="card card-light" href="#">
-                <div class="card-header">
-                    Restaurant
-                </div>
-                <div class="card-body p-1">
-                    <img src="images/restoran.jpg" class="img-fluid rounded" />
-                </div>
-
-            </a>
-        </div>
-        <div class="col-md-3">
-            <a class="card card-light" href="#">
-                <div class="card-header">
-                    Pelayanan 24 Jam
-                </div>
-                <div class="card-body p-1">
-                    <img src="images/resepsionis.jpg" class="img-fluid rounded" />
-                </div>
-            </a>
-        </div>
-    </div>
-
-    <h1 class="text-center my-4">Kamar</h1>
-
-    <div class="row kamar">
-        <div class="col-md-4">
-            <a class="card card-light" href="#">
-                <div class="card-header">
-                    Standart Room
-                </div>
-                <div class="card-body p-1">
-                    <img src="images/kamar_standar.jpg" class="img-fluid rounded" />
-                </div>
-                <div class="card-footer">
-                    Rp. 300.000
-                </div>
-            </a>
-        </div>
-        <div class="col-md-4">
-            <a class="card card-light" href="#">
-                <div class="card-header">
-                    Suite Room
-                </div>
-                <div class="card-body p-1">
-                    <img src="images/kamar_suite.jpg" class="img-fluid rounded" />
-                </div>
-                <div class="card-footer">
-                    Rp. 400.000
-                </div>
-            </a>
-        </div>
-        <div class="col-md-4">
-            <a class="card card-light" href="#">
-                <div class="card-header">
-                    Deluxe Room
-                </div>
-                <div class="card-body p-1">
-                    <img src="images/kamar_deluxe.jpg" class="img-fluid rounded" />
-                </div>
-                <div class="card-footer">
-                    Rp. 700.000
-                </div>
-            </a>
+    <div class="container cont mx-auto" style="margin-top: 80px;">
+        <div class="row">
+            @php $count = 0; @endphp
+            @foreach ($data as $row)
+                @if ($count < 10)
+                    <div class="col-4 mx-auto">
+                        <div class="card">
+                            @if ($row->foto_makanan)
+                                <div class="form-group">
+                                    <img src="{{ url('images/makanan/' . $row->foto_makanan) }}" class="img-fluid"
+                                        style="width: 400px; height: 200px;">
+                                </div>
+                            @endif
+                            <div class="card-body card-content">
+                                <h5 class="card-title custom-titlekamar">{{ ucwords($row->nama_makanan) }}</h5>
+                                <p class="card-text">Rp. {{ number_format($row->harga_makanan, 2, ',', '.') }} </p>
+                                <a href="#" class="btn btn-primary">Pesan</a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                @php $count++; @endphp
+            @endforeach
         </div>
     </div>
 @endsection

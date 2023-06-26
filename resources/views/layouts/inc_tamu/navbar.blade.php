@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-info shadow">
+<nav class="navbar navbar-expand-md navbar-dark shadow fixed-top" style="background-color: transparent">
     <div class="container">
         <a class="navbar-brand h1" href="{{ route('home') }}">
             <img src="../assets/favicon.png" width="30" height="30" class="d-inline-block align-top img-circle"

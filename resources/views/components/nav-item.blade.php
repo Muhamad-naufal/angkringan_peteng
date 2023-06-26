@@ -1,11 +1,11 @@
 @props(['label', 'icon', 'link'])
-<?php
-$path = trim(str_replace(url('/'), '', $link), '/');
-$wildchar = $path == 'admin' ? '' : '*';
-$is = request()->is($path . $wildchar);
-?>
+@php
+    $path = trim(str_replace(url('/'), '', $link), '/');
+    $wildchar = $path == 'admin' ? '' : '*';
+    $is = request()->is($path . $wildchar);
+@endphp
 <li class="nav-item">
-    <a href="<?= $link ?>" class="nav-link {{ $is ? 'active' : '' }}">
+    <a href="{{ $link }}" class="nav-link {{ $is ? 'active' : '' }}">
         <i class="nav-icon {{ $icon }}"></i>
         <p>
             {{ $label }}
