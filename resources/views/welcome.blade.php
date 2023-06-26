@@ -1,16 +1,25 @@
 @extends('layouts.tamu', ['title' => 'Home'])
 
 @section('content')
-    <div style="position: relative">
-        <img src="{{ asset('images/background.jpg') }}" alt="background" class="img-fluid"
-            style="width: 100%; height:620px; filter: brightness(0.5);">
-    </div>
-    <div>
-        <h1 style="position: absolute; margin-left:250px; margin-top:180px; top: 0; font-size: 70px; color: #fff; padding:10%;"
-            class="text-center pt-3 pb-5">Selamat
-            Datang di
-            <br><span><strong>Angkringan
-                    Peteng</strong></span>
-        </h1>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-center">Tempat Nyaman</h2>
+                <p> Berada di tepi sawah dengan pemandangan hijaunya tanaman pagi yang menguning dan masih hijau asri.
+                    Fasilitas lengkap dan bersih, dilengkapi dengan kamar mandi yang bersih dan seger</p>
+            </div>
+            <div class="col-6">
+                <h2 class="text-center">Menu Aman</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore ut omnis eum voluptatum dolorum unde
+                    voluptatibus beatae atque libero quod fuga debitis aspernatur quisquam quidem expedita inventore quae
+                    magnam autem perspiciatis, in nihil. Tenetur quaerat iste consequuntur quae doloremque magnam,
+                    consequatur quam magni, reprehenderit obcaecati odit voluptates fugit voluptate dicta molestiae
+                    explicabo praesentium aliquid quibusdam maxime, deserunt ab autem modi nihil nostrum. Doloribus quia
+                    earum possimus eos saepe illo praesentium debitis et voluptate quibusdam fugiat incidunt deleniti ad
+                    quisquam, quo placeat sint? Eius debitis itaque eveniet aliquid? Harum velit necessitatibus aspernatur
+                    cum ducimus, id, quis, cupiditate totam fugit pariatur debitis?.</p>
+            </div>
+        </div>
     </div>
 @endsection
