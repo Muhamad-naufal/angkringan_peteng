@@ -14,8 +14,6 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
     <script src="https://kit.fontawesome.com/25db4f44a1.js" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body class="hold-transition">
@@ -23,11 +21,13 @@
     @include('layouts.inc_tamu.navbar')
 
     <div class="container-fluid p-0">
-        <h1 class="text-center pt-3 pb-5">Selamat Datang di <br><strong>Angkringan Peteng</strong></h1>
+
     </div>
 
-    <div class="container content">
-        @yield('content')
+    <div class="background-container">
+        <div class="overlay-text">
+            @yield('content')
+        </div>
     </div>
 
     <!-- jQuery -->
