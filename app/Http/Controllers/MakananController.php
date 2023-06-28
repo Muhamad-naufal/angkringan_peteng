@@ -20,7 +20,7 @@ class MakananController extends Controller
             })
             ->paginate(50);
 
-        return view('makanan.index', ['data' => $data]);
+        return view('makanan.index', compact('data'));
     }
 
     /**

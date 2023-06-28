@@ -20,10 +20,6 @@
     <!-- As a link -->
     @include('layouts.inc_tamu.navbar')
 
-    <div class="container-fluid p-0">
-
-    </div>
-
     <div class="background-container">
         <div class="overlay-text">
             @yield('content')
@@ -36,6 +32,8 @@
     <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/adminlte/dist/js/adminlte.min.js"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
+    @stack('scripts')
 </body>
 
 </html>

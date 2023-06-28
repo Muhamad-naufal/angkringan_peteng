@@ -19,18 +19,5 @@ class AdminSeeder extends Seeder
             'role'    => 'admin',
             'password' => bcrypt('admin12345'),
         ]);
-
-        Admin::create([
-            'nama'     => 'Kasir',
-            'username'    => 'kasir',
-            'role'    => 'kasir',
-            'password' => bcrypt('kasir123'),
-        ]);
-        Admin::create([
-            'nama'     => 'Naufal',
-            'username'    => 'naufal',
-            'role'    => 'kasir',
-            'password' => bcrypt('kasir1234'),
-        ]);
     }
 }

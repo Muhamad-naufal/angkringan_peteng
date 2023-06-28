@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReportController;
 use App\Models\Makanan;
 use Illuminate\Support\Facades\Route;
 
@@ -23,8 +25,7 @@ Route::get('/makanan', function () {
     $data = Makanan::all(); // Mendapatkan data dari model Makanan
     return view('makanan', compact('data'));
 })->name('makanan');
-
-
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 
 Route::group(
     [
@@ -40,6 +41,10 @@ Route::group(
             Route::view('/', 'dashboard')->name('dashboard');
             Route::get('/akun', 'AdminController@akun')->name('admin.akun');
             Route::put('/akun', 'AdminController@updateAkun');
+            Route::put('/orders/reset', 'OrderController@reset')->name('orders.reset');
+            Route::get('/order', [OrderController::class, 'index'])->name('order.index');
+            Route::put('/orders/{order}', [OrderController::class, 'update'])->name('order.update');
+            Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
             Route::group(['middleware' => ['can:role,"admin"']], function () {
                 Route::resource('admin', 'AdminController');
                 Route::resource('makanan', 'MakananController');

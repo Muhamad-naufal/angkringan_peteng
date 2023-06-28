@@ -14,6 +14,8 @@
                 @can('role', 'admin')
                     <x-nav-item label="User Admin" icon="fas fa-users" :link="route('admin.index')" />
                     <x-nav-item label="User Makanan" icon="fa-solid fa-utensils" :link="route('makanan.index')" />
+                    <x-nav-item label="Orderan" icon="fa-solid fa-mug-saucer" :link="route('order.index')" />
+                    <x-nav-item label="Laporan" icon="fa-solid fa-book" :link="route('reports.index')" />
                 @endcan
             </ul>
         </nav>
