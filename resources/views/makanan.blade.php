@@ -13,6 +13,7 @@
                     <thead>
                         <tr>
                             <th>Nama Makanan</th>
+                            <th>Gambar Makanan</th>
                             <th>Harga Makanan</th>
                             <th>Jumlah</th>
                             <th>Subtotal</th>
@@ -24,6 +25,15 @@
                             @if ($count < 10)
                                 <tr>
                                     <td>{{ ucwords($row->nama_makanan) }}</td>
+                                    <td>
+                                        @if ($row->foto_makanan)
+                                            <div class="mb-2">
+                                                <img src="{{ asset('images/makanan/' . $row->foto_makanan) }}"
+                                                    alt="Foto Makanan" style="max-width: 200px">
+                                            </div>
+                                        @endif
+                                    </td>
+
                                     <td>Rp. {{ number_format($row->harga_makanan, 2, ',', '.') }}</td>
                                     <td>
                                         <input type="number" class="form-control quantity-input" name="quantity[]"
@@ -125,7 +135,7 @@
                         var row = '<tr>' +
                             '<td>' + foodName + '</td>' +
                             '<td>' + quantity + '</td>' +
-                            '<td>Rp. ' + price.toFixed(2) + '</td>' +
+                            '<td>Rp. ' + price.toFixed(2) * quantity + '</td>' +
                             '</tr>';
 
                         $('#orderSummaryTableBody').append(row);

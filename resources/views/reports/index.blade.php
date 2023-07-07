@@ -2,6 +2,14 @@
 
 @section('content-header')
     <h1 class="m-0">Laporan Pemasukan Dan Pengeluaran</h1>
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <form action="{{ route('orders.reset') }}" method="POST">
+            @csrf
+            @method('PUT')
+            <button type="submit" class="btn btn-success reset-button">Reset</button>
+        </form>
+        <button class="print-button btn btn-success" onclick="window.print()">Print Laporan</button>
+    </div>
 @endsection
 
 @section('content')
@@ -46,7 +54,6 @@
 
     <body>
         <h1>Laporan Pemesanan</h1>
-
         <table>
             <thead>
                 <tr>
@@ -98,37 +105,6 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="button-container">
-            <form action="{{ route('orders.reset') }}" method="POST">
-                @csrf
-                @method('PUT')
-                <button type="submit" class="reset-button">Reset</button>
-            </form>
-            <button class="print-button" onclick="window.print()">Print Laporan</button>
-
-            <style>
-                .reset-button,
-                .print-button {
-                    background-color: #4CAF50;
-                    border: none;
-                    color: white;
-                    padding: 10px 20px;
-                    text-align: center;
-                    text-decoration: none;
-                    display: inline-block;
-                    font-size: 16px;
-                    margin-top: 10px;
-                    cursor: pointer;
-                    border-radius: 4px;
-                    transition: background-color 0.3s ease;
-                }
-
-                .reset-button:hover,
-                .print-button:hover {
-                    background-color: #45a049;
-                }
-            </style>
-        </div>
     </body>
 
     </html>

@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 class AdminController extends Controller
 {
@@ -140,5 +143,30 @@ class AdminController extends Controller
         $admin->update($arr);
 
         return redirect()->route('admin.index')->with('status', 'update');
+    }
+    public function chart()
+    {
+        $data = Order::select(DB::raw('COUNT(*) as count, orders'))
+            ->groupBy('orders')
+            ->get();
+
+        $chartData = $this->processData($data);
+
+        return view('chart', compact('chartData'));
+    }
+
+    private function processData($data)
+    {
+        $chartData = [
+            'labels' => [],
+            'data' => [],
+        ];
+
+        foreach ($data as $item) {
+            $chartData['labels'][] = $item->orders;
+            $chartData['data'][] = $item->count;
+        }
+
+        return $chartData;
     }
 }

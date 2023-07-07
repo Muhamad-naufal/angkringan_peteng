@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Redirect;
 use App\Models\Makanan;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,7 @@ class MakananController extends Controller
     {
         $request->validate([
             'nama_makanan' => 'required|min:3',
-            'foto' => 'required|image|mimes:png,jpg,jpeg|between:40,1000',
+            'foto' => 'required|image|mimes:png,jpg,jpeg|between:10,1000',
             'jumlah' => 'required',
             'harga' => 'required'
         ]);
@@ -53,71 +54,57 @@ class MakananController extends Controller
 
         return redirect()->route('makanan.index')->with('status', 'store');
     }
+    public function edit($id)
+    {
+        $makanan = Makanan::findOrFail($id);
+        return view('makanan.edit', compact('makanan'));
+    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Makanan $makanan)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nama_makanan' => 'required|min:3',
-            'foto' => 'nullable|image|mimes:png,jpg,jpeg|dimensions:min_width=1000,min_height=500|between:40,1000',
-            'jumlah' => 'required',
-            'harga' => 'required'
+            'foto_makanan' => 'nullable|image|mimes:png,jpg,jpeg|between:10,1000',
+            'jum_makanan' => 'required',
+            'harga_makanan' => 'required'
         ]);
 
-        if ($makanan->foto_makanan && $request->foto) {
-            $file = 'assets/makanan/' . $makanan->foto_makanan;
+        $makanan = Makanan::findOrFail($id);
 
-            if (file_exists($file)) {
-                unlink($file);
+        if ($request->hasFile('foto_makanan')) {
+            // Menghapus foto lama jika ada
+            if ($makanan->foto_makanan) {
+                $file = public_path('images/makanan/' . $makanan->foto_makanan);
+                if (file_exists($file)) {
+                    unlink($file);
+                }
             }
-        }
 
-        if ($request->foto) {
-            $ext = $request->foto->getClientOriginalExtension();
+            // Mengunggah foto baru
+            $foto = $request->file('foto_makanan');
+            $ext = $foto->getClientOriginalExtension();
             $filename = rand(9, 999) . '_' . time() . '.' . $ext;
-            $request->foto->move('images/makanan/', $filename);
+            $foto->move(public_path('images/makanan'), $filename);
 
-            $arr = [
-                'nama_makanan' => $request->nama_makanan,
-                'foto_makanan' => $filename,
-                'jum_makanan' => $request->jumlah,
-                'harga_makanan' => $request->harga
-            ];
-        } else {
-            $arr = [
-                'nama_makanan' => $request->nama_makanan,
-                'jum_makanan' => $request->jumlah,
-                'harga_makanan' => $request->harga
-            ];
+            $makanan->foto_makanan = $filename;
         }
 
-        $makanan->update($arr);
+        $makanan->nama_makanan = $request->input('nama_makanan');
+        $makanan->jum_makanan = $request->input('jum_makanan');
+        $makanan->harga_makanan = $request->input('harga_makanan');
+        $makanan->save();
 
         return redirect()->route('makanan.index')->with('status', 'update');
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Makanan $makanan)
-    {
-        return view('makanan.edit', ['row' => $makanan]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Makanan $makanan)
     {
         if ($makanan->foto_makanan) {
-            $file = 'assets/makanan/' . $makanan->foto_makanan;
+            $file = 'images/makanan/' . $makanan->foto_makanan;
 
             if (file_exists($file)) {
                 unlink($file);
@@ -126,6 +113,6 @@ class MakananController extends Controller
 
         $makanan->delete();
 
-        return back()->with('status', 'destroy');
+        return redirect()->back()->with('status', 'destroy');
     }
 }

@@ -13,6 +13,7 @@
                     <th>Total Harga</th>
                     <th>No Meja</th>
                     <th>Status</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,7 +23,8 @@
                             <td>{{ $order->id }}</td>
                             <td>{{ $order->food_name }}</td>
                             <td>{{ $order->quantity }}</td>
-                            <td>Rp. {{ number_format($order->price, 2, ',', '.') }}</td>
+                            <td>Rp. {{ number_format($order->price * $order->quantity, 2, ',', '.') }}</td>
+                            <td>{{ $order->table_number }}</td>
                             <td>{{ $order->status }}</td>
                             <td>
                                 <form action="{{ route('order.update', $order->id) }}" method="POST">
@@ -34,7 +36,6 @@
                         </tr>
                     @endif
                 @endforeach
-
             </tbody>
         </table>
     </div>

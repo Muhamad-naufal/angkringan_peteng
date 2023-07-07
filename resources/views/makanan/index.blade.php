@@ -39,7 +39,8 @@
                             <td>Rp. {{ number_format($row->harga_makanan, 2, ',', '.') }}</td>
                             <td>{{ $row->jum_makanan }}</td>
                             <td>
-                                <x-btn-edit :link="route('makanan.edit', ['makanan' => $row->id])" />
+                                <x-btn-edit :link="route('makanan.edit', $row)" />
+
                                 <form onsubmit="return confirm('Anda memilih menghapus data, apakah yakin ?')" method="POST"
                                     action="{{ route('makanan.destroy', $row->id) }}" class="d-inline">
                                     @csrf
